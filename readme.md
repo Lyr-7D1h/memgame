@@ -1,4 +1,4 @@
-# The Memory Game
+# The MemGame
 
 Welcome to the memory game.
 

@@ -1,5 +1,5 @@
 {
-  "name": "lepaya-server",
+  "name": "memgame-server",
   "version": "1.0.0",
   "description": "Fastify Server",
   "main": "src/index.ts",
