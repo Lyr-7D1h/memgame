@@ -1,11 +1,7 @@
-const { Link } = require("react-router-dom");
+import Page from "../common/Page";
 
 const HomePage = () => {
-  return (
-    <>
-      <Link to="scoreboard"> Scoreboard</Link>
-    </>
-  );
+  return <Page></Page>;
 };
 
 export default HomePage;

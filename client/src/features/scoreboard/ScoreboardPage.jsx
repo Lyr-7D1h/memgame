@@ -1,5 +1,7 @@
+import Page from "../common/Page";
+
 const ScoreboardPage = () => {
-  return <></>;
+  return <Page></Page>;
 };
 
 export default ScoreboardPage;
