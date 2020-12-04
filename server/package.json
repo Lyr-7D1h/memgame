@@ -1,0 +1,27 @@
+{
+  "name": "lepaya-server",
+  "version": "1.0.0",
+  "description": "Fastify Server",
+  "main": "src/index.ts",
+  "author": "Ivo Velthoven",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "yarn start:dev",
+    "start:dev": "NODE_ENV=development tsnd src/index.ts",
+    "start:prod": "NODE_ENV=production node dist/index.js"
+  },
+  "dependencies": {
+    "@types/node": "^14.14.10",
+    "@types/pino": "^6.3.4",
+    "fastify": "^3.9.1",
+    "fastify-autoload": "^3.3.1",
+    "fastify-static": "^3.3.0",
+    "pino": "^6.7.0",
+    "pino-pretty": "^4.3.0",
+    "typescript": "^4.1.2"
+  },
+  "devDependencies": {
+    "ts-node-dev": "^1.0.0"
+  }
+}
