@@ -5,26 +5,35 @@ import MemResult from "./MemResult";
 import SelectAmountCards from "./SelectAmountCards";
 
 const HomePage = () => {
-  const [selectedOption, setSelectedOption] = useState(4);
-  const [history, setHistory] = useState(null);
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [results, setResults] = useState(null);
   const options = [4, 8, 12];
+  const rounds = 5;
 
-  const handleOnFinish = (history) => {
-    setHistory(history);
+  const handleOnFinish = (results) => {
+    setResults(results);
   };
 
   const reset = () => {
     setSelectedOption(null);
-    setHistory(null);
+    setResults(null);
   };
 
   let Content;
-  if (history) {
-    Content = <MemResult onRetry={reset} history={history} />;
+  if (results) {
+    Content = (
+      <MemResult
+        onRetry={reset}
+        rounds={rounds}
+        amount={selectedOption}
+        results={results}
+      />
+    );
   } else if (selectedOption) {
     Content = (
       <MemCardsGame
-        rounds={2}
+        rounds={rounds}
+        seconds={5}
         onFinish={handleOnFinish}
         amount={selectedOption}
       />

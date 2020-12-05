@@ -17,7 +17,7 @@ const MemCard = ({ card, onClick }) => {
   }
 
   let cursor;
-  if (flipped && status === null) {
+  if (clickable && status === null) {
     cursor = "pointer";
   } else {
     cursor = "default";

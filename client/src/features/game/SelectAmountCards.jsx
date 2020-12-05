@@ -4,7 +4,13 @@ import NumberCard from "../common/NumberCard";
 const SelectAmountCards = ({ options, onClick }) => {
   return (
     <>
-      <Typography.Title style={{ textAlign: "center", paddingBottom: "20px" }}>
+      <Typography.Title
+        style={{
+          textAlign: "center",
+          paddingTop: "30px",
+          paddingBottom: "20px",
+        }}
+      >
         How Many Cards
       </Typography.Title>
       <Row

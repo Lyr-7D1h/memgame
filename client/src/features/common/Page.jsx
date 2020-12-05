@@ -36,9 +36,7 @@ const Page = ({ children }) => {
           </Col>
         </Row>
       </Header>
-      <Content style={{ padding: "20px", paddingTop: "50px" }}>
-        {children}
-      </Content>
+      <Content>{children}</Content>
     </Layout>
   );
 };

@@ -5,7 +5,7 @@ const getRandomNumbers = (amount: number) => {
   const numbers: number[] = [];
 
   const getRand = () => {
-    const rand = Math.round(Math.random() * 100);
+    const rand = Math.ceil(Math.random() * 100);
     if (numbers.includes(rand)) {
       getRand();
     } else {
