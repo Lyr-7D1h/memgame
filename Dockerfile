@@ -12,12 +12,12 @@ COPY . /usr/src/app
 
 # Build Client
 WORKDIR /usr/src/app/client
-RUN npm install --production
+RUN yarn install --production
 RUN yarn build
 
 # Build Server
 WORKDIR /usr/src/app/server
-RUN npm install --production
+RUN yarn install --production
 RUN yarn build
 
 # Start App
