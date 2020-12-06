@@ -31,6 +31,8 @@ I don't use webpack because I don't want to deal with the overhead a simple **ts
 
 I use **pino** as logger for good and clear development logs and fast/minimal production logs.
 
+I use **Sqlite** as place for permanent storage. This is because I don't want you to deal with setting up a database. And it is usefull enough for such a simple data structure.
+
 ## Build
 
 ### Development
