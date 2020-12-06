@@ -33,7 +33,7 @@ I use **pino** as logger for good and clear development logs and fast/minimal pr
 
 I use **Sqlite** as place for permanent storage. This is because I don't want you to deal with setting up a database. And it is usefull enough for such a simple data structure.
 
-## Build
+## Build/Run
 
 ### Development
 
@@ -53,6 +53,8 @@ yarn
 yarn start
 ```
 
+See http://localhost:3000
+
 ### Production
 
 ```bash
@@ -64,6 +66,15 @@ cd ../server
 yarn --production
 yarn build
 yarn start:prod
+```
+
+See http://localhost:5000
+
+### Docker
+
+```bash
+docker build -t memgame
+docker run --rm --it memgame
 ```
 
 ### Notes
