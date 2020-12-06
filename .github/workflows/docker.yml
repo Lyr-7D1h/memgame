@@ -10,13 +10,16 @@ jobs:
     steps:
       - name: checkout code
         uses: actions/checkout@v2
-      - name: install buildx
+      - name: Docker Login
+        run: echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USER }}" --password-stdin
+      - name: Install Buildx
         id: buildx
         uses: crazy-max/ghaction-docker-buildx@v1
         with:
-          version: latest
-      - name: build the image
+          buildx-version: latest
+      - name: Build and push
         run: |
-          docker buildx build \
-          --tag lyr7d1h/memgame:latest \
-          --platform linux/amd64,linux/arm/v7,linux/arm64 .
+          docker buildx build --push \
+            --tag "${{secrets.DOCKERHUB_USER}}/memgame:${GITHUB_SHA::8}" \
+            --tag "${{secrets.DOCKERHUB_USER}}/memgame:latest" \
+            --platform linux/amd64,linux/arm64,linux/arm/v7 .
