@@ -1,5 +1,5 @@
 # The MemGame
-![build our image](https://github.com/Lyr-7D1h/memgame/workflows/build%20our%20image/badge.svg?branch=master)
+![build image](https://github.com/Lyr-7D1h/memgame/workflows/build%20our%20image/badge.svg?branch=master)
 
 Welcome to the memory game.
 I slightly changed the requirements to make it more interesting and game like.
