@@ -36,7 +36,7 @@ const MemResult = ({ score, rounds, cardCount, onRetry }) => {
       subTitle={feedback}
       extra={[
         <Button
-          onClick={setShowSave(true)}
+          onClick={() => setShowSave(true)}
           size="large"
           type="primary"
           key="scoreboard"
