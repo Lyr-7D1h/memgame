@@ -2,7 +2,7 @@
 # Production Build: client + server
 #
 
-FROM node:14
+FROM node:alpine
 
 # App Directory
 WORKDIR /usr/src/app
@@ -12,12 +12,12 @@ COPY . /usr/src/app
 
 # Build Client
 WORKDIR /usr/src/app/client
-RUN yarn install --production
+RUN npm install --production
 RUN yarn build
 
 # Build Server
 WORKDIR /usr/src/app/server
-RUN yarn install --production
+RUN npm install --production
 RUN yarn build
 
 # Start App
