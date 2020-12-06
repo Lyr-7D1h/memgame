@@ -6,6 +6,7 @@ import { Button, Col, Progress, Row } from "antd";
 import Title from "antd/lib/typography/Title";
 import { RightCircleOutlined } from "@ant-design/icons";
 
+// get numbers from server
 const getNumbers = (amount, cb) => {
   requester
     .get(`rand/${amount}`)
@@ -14,13 +15,35 @@ const getNumbers = (amount, cb) => {
   return cb;
 };
 
+// calculate a score depending on card statuses
+const calculateScore = (cards) => {
+  const amountTotal = cards.length;
+  let score = 0;
+  let amountCorrect = 0;
+  for (const card of cards) {
+    if (card.status === "correct") {
+      amountCorrect += 1;
+    }
+  }
+
+  // If full correct add 100 points
+  if (amountCorrect === amountTotal) {
+    score += 100;
+  } else if (amountCorrect > 0) {
+    // If something correct exponentially shrink 100 points depending on amount wrong
+    score += Math.floor(100 / 2 ** (amountTotal - amountCorrect));
+  }
+
+  return score;
+};
+
 const MemCardsGame = ({ amount, rounds: maxRound, seconds, onFinish }) => {
   const [cards, setCards] = useState([]);
   const [progress, setProgress] = useState(100);
   const [hasStarted, setHasStarted] = useState(false);
   const [answers, setAnswers] = useState([]);
   const [round, setRound] = useState(1);
-  const [results, setResults] = useState([]);
+  const [score, setScore] = useState(0);
 
   // Setup
   useEffect(() => {
@@ -71,54 +94,51 @@ const MemCardsGame = ({ amount, rounds: maxRound, seconds, onFinish }) => {
     }
   }, [cards, hasStarted]);
 
+  const finish = () => {
+    // Set back to initial values
+    setHasStarted(false);
+    setProgress(100);
+    setRound(1);
+    getNumbers(amount, (numbers) => {
+      setCards(
+        numbers.map((num) => ({
+          value: num,
+          flipped: true,
+          clickable: false,
+          status: null,
+        }))
+      );
+
+      const newAnswers = [...numbers].sort((a, b) => a - b);
+      setAnswers(newAnswers);
+
+      const currentScore = score + calculateScore(cards);
+      setScore(0);
+      // After reset complete finish with latest score added
+      onFinish(currentScore);
+    });
+  };
+
   const newRound = () => {
     setRound(round + 1);
 
-    // Add statuses to results
-    setResults((result) => {
-      result.push(cards.map((card) => card.status));
-      return result;
-    });
+    setScore((score) => score + calculateScore(cards));
 
-    if (round === maxRound) {
-      // Set back to initial values
-      setHasStarted(false);
+    // Reset if not finished
+    getNumbers(amount, (numbers) => {
+      setCards(
+        numbers.map((num) => ({
+          value: num,
+          clickable: false,
+          flipped: false,
+          status: null,
+        }))
+      );
+
       setProgress(100);
-      setRound(1);
-      setResults([]);
-      getNumbers(amount, (numbers) => {
-        setCards(
-          numbers.map((num) => ({
-            value: num,
-            flipped: true,
-            clickable: false,
-            status: null,
-          }))
-        );
-
-        const newAnswers = [...numbers].sort((a, b) => a - b);
-        setAnswers(newAnswers);
-
-        // After reset complete finish
-        onFinish(results);
-      });
-    } else {
-      // Reset if not finished
-      getNumbers(amount, (numbers) => {
-        setCards(
-          numbers.map((num) => ({
-            value: num,
-            clickable: false,
-            flipped: false,
-            status: null,
-          }))
-        );
-
-        setProgress(100);
-        const newAnswers = [...numbers].sort((a, b) => a - b);
-        setAnswers(newAnswers);
-      });
-    }
+      const newAnswers = [...numbers].sort((a, b) => a - b);
+      setAnswers(newAnswers);
+    });
   };
 
   const handleCardClick = (value) => {
@@ -143,9 +163,14 @@ const MemCardsGame = ({ amount, rounds: maxRound, seconds, onFinish }) => {
         return card;
       });
       setCards(newCards);
-      setTimeout(() => {
-        newRound();
-      }, 3000);
+
+      if (round === maxRound) {
+        finish();
+      } else {
+        setTimeout(() => {
+          newRound();
+        }, 3000);
+      }
     } else {
       const newCards = cards.map((card) => {
         if (card.value === value) {
@@ -155,11 +180,12 @@ const MemCardsGame = ({ amount, rounds: maxRound, seconds, onFinish }) => {
         return card;
       });
       setCards(newCards);
+      // Save shifted answers
+      setAnswers(answersClone);
     }
-
-    // Save shifted answers
-    setAnswers(answersClone);
   };
+
+  const titleStyle = { paddingBottom: "20px", paddingTop: "20px" };
 
   return (
     <div style={{ width: "100%", textAlign: "center" }}>
@@ -171,9 +197,16 @@ const MemCardsGame = ({ amount, rounds: maxRound, seconds, onFinish }) => {
         showInfo={false}
         percent={progress}
       />
-      <Title style={{ paddingBottom: "20px", paddingTop: "20px" }}>
-        Remember the numbers and select from Small to Big{" "}
-      </Title>
+      <Row>
+        <Col span={16}>
+          <Title style={titleStyle}>
+            Remember the numbers and select from Small to Big{" "}
+          </Title>
+        </Col>
+        <Col span={8}>
+          <Title style={titleStyle}>Score: {score}</Title>
+        </Col>
+      </Row>
       <Row gutter={[16, 16]} style={{ margin: "0px", padding: "20px" }}>
         {cards.map((card, i) => (
           <Col key={i} span={24 / amount}>

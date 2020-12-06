@@ -1,65 +1,28 @@
 import { Button, Progress, Result } from "antd";
 
-// Calculate score, percentage and roundsWon
-const calculateScore = (results, cardsAmount, roundsTotal) => {
-  let score = 0;
-  let roundsWon = 0;
-  for (const result of results) {
-    let amountResultCorrect = 0;
-    for (const status of result) {
-      if (status === "correct") {
-        amountResultCorrect += 1;
-      }
-    }
-
-    // If full correct add 100 points
-    if (amountResultCorrect === cardsAmount) {
-      roundsWon += 1;
-      score += 100;
-    } else {
-      // If partially correct exponentially shrink 100 points
-      score += Math.floor(100 / 2 ** (cardsAmount - amountResultCorrect));
-    }
-  }
-
-  const percentage =
-    roundsWon > 0 ? Math.floor((roundsWon / roundsTotal) * 100) : 0;
-
-  return { roundsWon, percentage, score };
-};
-
-const MemResult = ({
-  results,
-  rounds: roundsTotal,
-  amount: cardsAmount,
-  onRetry,
-}) => {
-  const score = calculateScore(results, cardsAmount, roundsTotal);
-
-  const ResultProgress = <Progress type="circle" percent={score.percentage} />;
+const MemResult = ({ score, rounds, onRetry }) => {
+  // percentage current score devided by total score (max 100 per round)
+  const percentage = Math.floor((score / (rounds * 100)) * 100);
+  const ResultProgress = (
+    <Progress status="normal" type="circle" percent={percentage} />
+  );
 
   let feedback;
-  if (score.percentage > 80) {
+  if (percentage > 80) {
     feedback = "Wow you must have a very big brain!";
-  } else if (score.percentage > 60) {
+  } else if (percentage > 60) {
     feedback = "I guess this will do.";
-  } else if (score.percentage > 20) {
+  } else if (percentage > 20) {
     feedback = "Well atleast you tried...";
   } else {
-    feedback = "Not really ";
+    feedback = "Not really sure if this is something for you..";
   }
 
   return (
     <Result
-      status="success"
+      style={{ marginTop: "40px" }}
       icon={ResultProgress}
-      title={
-        <>
-          You had {score.roundsWon} out of {roundsTotal} correct.
-          <br />
-          With a total Score of: {score.score}
-        </>
-      }
+      title={<>Total Score: {score}</>}
       subTitle={feedback}
       extra={[
         <Button type="primary" key="scoreboard">

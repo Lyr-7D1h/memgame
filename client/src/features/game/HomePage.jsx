@@ -5,28 +5,28 @@ import MemResult from "./MemResult";
 import SelectAmountCards from "./SelectAmountCards";
 
 const HomePage = () => {
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [results, setResults] = useState(null);
+  const [selectedOption, setSelectedOption] = useState(4);
+  const [score, setScore] = useState(null);
   const options = [4, 8, 12];
   const rounds = 1;
 
-  const handleOnFinish = (results) => {
-    setResults(results);
+  const handleOnFinish = (score) => {
+    setScore(score);
   };
 
   const reset = () => {
     setSelectedOption(null);
-    setResults(null);
+    setScore(null);
   };
 
   let Content;
-  if (results) {
+  if (typeof score === "number") {
     Content = (
       <MemResult
         onRetry={reset}
         rounds={rounds}
         amount={selectedOption}
-        results={results}
+        score={score}
       />
     );
   } else if (selectedOption) {
