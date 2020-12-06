@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: memgame
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: memgame
+  template:
+    metadata:
+      labels:
+        app: memgame
+    spec:
+      containers:
+        - name: memgame
+          image: lyr7d1h/memgame:latest
+          ports:
+            - containerPort: 5000

@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: "memgame-ingress"
+
+spec:
+  rules:
+    - host: mem.ivelthoven.nl
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: memgame-service
+                port:
+                  number: 80

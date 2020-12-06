@@ -2,7 +2,7 @@
 # Production Build: client + server
 #
 
-FROM node:latest
+FROM node:14
 
 # App Directory
 WORKDIR /usr/src/app

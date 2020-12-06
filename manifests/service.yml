@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: memgame-service
+spec:
+  type: ClusterIP
+  selector:
+    app: memgame
+    service: memgame-service
+  ports:
+    - port: 80
+      targetPort: 5000
