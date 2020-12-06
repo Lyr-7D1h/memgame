@@ -17,10 +17,14 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-server.register(fastifyAutoload, {
-  dir: path.join(__dirname, "routes"),
-  options: { prefix: "api" },
-});
+server
+  .register(fastifyAutoload, {
+    dir: path.join(__dirname, "plugins"),
+  })
+  .register(fastifyAutoload, {
+    dir: path.join(__dirname, "routes"),
+    options: { prefix: "api" },
+  });
 
 server.listen(5000, (err) => {
   if (err) {

@@ -1,6 +1,10 @@
 import { Button, Progress, Result } from "antd";
+import { useState } from "react";
+import SaveToScoreboard from "./SaveToScoreboard";
 
-const MemResult = ({ score, rounds, onRetry }) => {
+const MemResult = ({ score, rounds, cardCount, onRetry }) => {
+  const [showSave, setShowSave] = useState(false);
+
   // percentage current score devided by total score (max 100 per round)
   const percentage = Math.floor((score / (rounds * 100)) * 100);
   const ResultProgress = (
@@ -18,6 +22,12 @@ const MemResult = ({ score, rounds, onRetry }) => {
     feedback = "Not really sure if this is something for you..";
   }
 
+  if (showSave) {
+    return (
+      <SaveToScoreboard cardCount={cardCount} score={score} onRetry={onRetry} />
+    );
+  }
+
   return (
     <Result
       style={{ marginTop: "40px" }}
@@ -25,10 +35,15 @@ const MemResult = ({ score, rounds, onRetry }) => {
       title={<>Total Score: {score}</>}
       subTitle={feedback}
       extra={[
-        <Button type="primary" key="scoreboard">
+        <Button
+          onClick={setShowSave(true)}
+          size="large"
+          type="primary"
+          key="scoreboard"
+        >
           Save To Scoreboard
         </Button>,
-        <Button onClick={onRetry} key="again">
+        <Button onClick={onRetry} key="again" size="large">
           Back to menu
         </Button>,
       ]}

@@ -37,7 +37,7 @@ const calculateScore = (cards) => {
   return score;
 };
 
-const MemCardsGame = ({ amount, rounds: maxRound, seconds, onFinish }) => {
+const MemCardsGame = ({ cardCount, rounds: maxRound, seconds, onFinish }) => {
   const [cards, setCards] = useState([]);
   const [progress, setProgress] = useState(100);
   const [hasStarted, setHasStarted] = useState(false);
@@ -47,7 +47,7 @@ const MemCardsGame = ({ amount, rounds: maxRound, seconds, onFinish }) => {
 
   // Setup
   useEffect(() => {
-    getNumbers(amount, (numbers) => {
+    getNumbers(cardCount, (numbers) => {
       setCards(
         numbers.map((num) => ({
           value: num,
@@ -59,7 +59,7 @@ const MemCardsGame = ({ amount, rounds: maxRound, seconds, onFinish }) => {
       const newAnswers = [...numbers].sort((a, b) => a - b);
       setAnswers(newAnswers);
     });
-  }, [amount]);
+  }, [cardCount]);
 
   // Timer
   useEffect(() => {
@@ -99,7 +99,7 @@ const MemCardsGame = ({ amount, rounds: maxRound, seconds, onFinish }) => {
     setHasStarted(false);
     setProgress(100);
     setRound(1);
-    getNumbers(amount, (numbers) => {
+    getNumbers(cardCount, (numbers) => {
       setCards(
         numbers.map((num) => ({
           value: num,
@@ -125,7 +125,7 @@ const MemCardsGame = ({ amount, rounds: maxRound, seconds, onFinish }) => {
     setScore((score) => score + calculateScore(cards));
 
     // Reset if not finished
-    getNumbers(amount, (numbers) => {
+    getNumbers(cardCount, (numbers) => {
       setCards(
         numbers.map((num) => ({
           value: num,
@@ -209,7 +209,7 @@ const MemCardsGame = ({ amount, rounds: maxRound, seconds, onFinish }) => {
       </Row>
       <Row gutter={[16, 16]} style={{ margin: "0px", padding: "20px" }}>
         {cards.map((card, i) => (
-          <Col key={i} span={24 / amount}>
+          <Col key={i} span={24 / cardCount}>
             <MemCard card={card} onClick={handleCardClick} />
           </Col>
         ))}

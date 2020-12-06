@@ -5,9 +5,9 @@ import MemResult from "./MemResult";
 import SelectAmountCards from "./SelectAmountCards";
 
 const HomePage = () => {
-  const [selectedOption, setSelectedOption] = useState(4);
+  const [selectedCardCount, setSelectedCardCount] = useState(null);
   const [score, setScore] = useState(null);
-  const options = [4, 8, 12];
+  const cardCounts = [4, 8, 12];
   const rounds = 1;
 
   const handleOnFinish = (score) => {
@@ -15,7 +15,7 @@ const HomePage = () => {
   };
 
   const reset = () => {
-    setSelectedOption(null);
+    setSelectedCardCount(null);
     setScore(null);
   };
 
@@ -25,22 +25,22 @@ const HomePage = () => {
       <MemResult
         onRetry={reset}
         rounds={rounds}
-        amount={selectedOption}
+        cardCount={selectedCardCount}
         score={score}
       />
     );
-  } else if (selectedOption) {
+  } else if (selectedCardCount) {
     Content = (
       <MemCardsGame
         rounds={rounds}
-        seconds={5 * (options.indexOf(selectedOption) + 1)} // increase time depending on option
+        seconds={5 * (cardCounts.indexOf(selectedCardCount) + 1)} // increase time depending on option
         onFinish={handleOnFinish}
-        amount={selectedOption}
+        cardCount={selectedCardCount}
       />
     );
   } else {
     Content = (
-      <SelectAmountCards options={options} onClick={setSelectedOption} />
+      <SelectAmountCards options={cardCounts} onClick={setSelectedCardCount} />
     );
   }
 
