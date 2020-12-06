@@ -1,5 +1,6 @@
 #
 # Production Build: client + server
+# Using npm due to buildx errors 
 #
 
 FROM node:alpine
@@ -12,13 +13,13 @@ COPY . /usr/src/app
 
 # Build Client
 WORKDIR /usr/src/app/client
-RUN yarn install --production
-RUN yarn build
+RUN npm install --production 
+RUN npm run build
 
 # Build Server
 WORKDIR /usr/src/app/server
-RUN yarn install --production
-RUN yarn build
+RUN npm install --production
+RUN npm run build
 
 # Start App
 CMD yarn start:prod
