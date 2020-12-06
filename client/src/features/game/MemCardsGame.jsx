@@ -82,8 +82,8 @@ const MemCardsGame = ({ amount, rounds: maxRound, seconds, onFinish }) => {
 
     if (round === maxRound) {
       // Set back to initial values
-      setProgress(100);
       setHasStarted(false);
+      setProgress(100);
       setRound(1);
       setResults([]);
       getNumbers(amount, (numbers) => {
@@ -98,8 +98,10 @@ const MemCardsGame = ({ amount, rounds: maxRound, seconds, onFinish }) => {
 
         const newAnswers = [...numbers].sort((a, b) => a - b);
         setAnswers(newAnswers);
+
+        // After reset complete finish
+        onFinish(results);
       });
-      onFinish(results);
     } else {
       // Reset if not finished
       getNumbers(amount, (numbers) => {
@@ -130,7 +132,6 @@ const MemCardsGame = ({ amount, rounds: maxRound, seconds, onFinish }) => {
       status = "wrong";
     }
 
-    console.log(firstAnswer, value, answersClone, answers);
     // New round if wrong or all answers were correct
     if (status === "wrong" || answersClone.length === 0) {
       const newCards = cards.map((card) => {

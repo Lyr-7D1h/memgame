@@ -8,7 +8,7 @@ const HomePage = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [results, setResults] = useState(null);
   const options = [4, 8, 12];
-  const rounds = 5;
+  const rounds = 1;
 
   const handleOnFinish = (results) => {
     setResults(results);
@@ -33,7 +33,7 @@ const HomePage = () => {
     Content = (
       <MemCardsGame
         rounds={rounds}
-        seconds={5}
+        seconds={5 * (options.indexOf(selectedOption) + 1)} // increase time depending on option
         onFinish={handleOnFinish}
         amount={selectedOption}
       />

@@ -1,6 +1,4 @@
-import Icon from "@ant-design/icons";
-import { Card, Col, Row } from "antd";
-import Paragraph from "antd/lib/typography/Paragraph";
+import { Col, Row } from "antd";
 import Title from "antd/lib/typography/Title";
 
 const NumberCard = ({ value, onClick, style }) => {
