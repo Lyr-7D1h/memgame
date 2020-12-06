@@ -3,7 +3,7 @@
 Welcome to the memory game.
 I slightly changed the requirements to make it more interesting and game like.
 
-You select either 4, 8 or 12 cards. When you click start the game begins. Instead of a single rounds you have 12. Each round your score gets increased based on amount correct. Each round is on a timer depending on how many cards there are. (4 => 5s, 8 => 10s, 12 => 15s). When you've done all rounds you will get your result with corresponding feedback. You also get the option to save it to the scoreboard using your own alias.
+You select either 4, 8 or 12 cards. When you click start the game begins. Instead of a single rounds you have 10. Each round your score gets increased based on amount correct. Each round is on a timer depending on how many cards there are. (4 => 5s, 8 => 10s, 12 => 15s). When you've done all rounds you will get your result with corresponding feedback. You also get the option to save it to the scoreboard using your own alias.
 
 ## Architecture
 

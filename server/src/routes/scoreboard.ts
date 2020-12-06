@@ -36,7 +36,7 @@ const scoreBoardRoute: FastifyPluginCallback = async (fastify, _, done) => {
         const usernameLength = request.body.username.length;
         if (usernameLength < 0 || usernameLength > 29) {
           done(new Error("Username length must be between 1-29"));
-        } else if (request.body.score > 1200) {
+        } else if (request.body.score > 1000) {
           done(new Error("Score can't be higher then what's possible"));
         } else {
           done();

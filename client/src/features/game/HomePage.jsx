@@ -8,7 +8,7 @@ const HomePage = () => {
   const [selectedCardCount, setSelectedCardCount] = useState(null);
   const [score, setScore] = useState(null);
   const cardCounts = [4, 8, 12];
-  const rounds = 12;
+  const rounds = 10;
 
   const handleOnFinish = (score) => {
     setScore(score);
