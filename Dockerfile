@@ -3,7 +3,7 @@
 # Using npm due to buildx errors 
 #
 
-FROM node:alpine
+FROM node:10-alpine
 
 # App Directory
 WORKDIR /usr/src/app
@@ -22,5 +22,5 @@ RUN npm install --production
 RUN npm run build
 
 # Start App
-CMD yarn start:prod
+CMD npm run start:prod
 EXPOSE 5000
