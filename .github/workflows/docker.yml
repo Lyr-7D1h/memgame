@@ -23,9 +23,12 @@ jobs:
         run: |
           docker buildx create --name builder
           docker buildx use builder
+      - name: Info
+        run: |
+          python --version
       - name: Build and push
         run: |
           docker buildx build --push \
             --tag "${{secrets.DOCKERHUB_USER}}/memgame:${GITHUB_SHA::8}" \
             --tag "${{secrets.DOCKERHUB_USER}}/memgame:latest" \
-            --platform linux/amd64,linux/arm/v7 .
+            --platform linux/arm/v7 .
