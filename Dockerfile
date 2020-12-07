@@ -3,7 +3,7 @@
 # Using npm due to buildx errors 
 #
 
-FROM node:14-alpine
+FROM node:14
 
 # App Directory
 WORKDIR /usr/src/app
