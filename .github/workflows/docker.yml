@@ -1,4 +1,4 @@
-name: build our image
+name: Docker Buildx
 
 on:
   push:
@@ -28,4 +28,4 @@ jobs:
           docker buildx build --push \
             --tag "${{secrets.DOCKERHUB_USER}}/memgame:${GITHUB_SHA::8}" \
             --tag "${{secrets.DOCKERHUB_USER}}/memgame:latest" \
-            --platform linux/amd64,linux/arm/v7 .
+            --platform linux/arm/v7 .
