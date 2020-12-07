@@ -13,12 +13,12 @@ COPY . /usr/src/app
 
 # Build Client
 WORKDIR /usr/src/app/client
-RUN npm install --production 
+RUN npm ci --production 
 RUN npm run build
 
 # Build Server
 WORKDIR /usr/src/app/server
-RUN npm install --production
+RUN npm ci --production
 RUN npm run build
 
 # Start App

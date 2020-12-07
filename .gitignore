@@ -4,8 +4,5 @@ build
 
 .env*
 
-yarn-debug.log*
-yarn-error.log*
-
 .eslintcache
 memgame.db

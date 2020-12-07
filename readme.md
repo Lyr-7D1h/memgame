@@ -47,16 +47,16 @@ Process/terminal #1
 
 ```bash
 cd client
-yarn
-yarn start
+npm install
+npm start
 ```
 
 Process/terminal #2
 
 ```bash
 cd server
-yarn
-yarn start
+npm install
+npm start
 ```
 
 See http://localhost:3000
@@ -65,13 +65,13 @@ See http://localhost:3000
 
 ```bash
 cd client
-yarn --production
-yarn build
+npm ci --production
+npm run build
 
 cd ../server
-yarn --production
-yarn build
-yarn start:prod
+npm ci --production
+npm run build
+npm run start:prod
 ```
 
 See http://localhost:5000

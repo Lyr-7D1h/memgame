@@ -8,5 +8,6 @@ spec:
     app: memgame
     service: memgame-service
   ports:
-    - port: 80
+    - protocol: TCP
+      port: 80
       targetPort: 5000
