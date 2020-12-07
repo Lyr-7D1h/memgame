@@ -76,7 +76,7 @@ See http://localhost:5000
 
 ```bash
 docker build -t memgame
-docker run --rm --it memgame
+docker run --rm --it -p 5000:5000 memgame
 ```
 
 See http://localhost:5000
