@@ -15,6 +15,10 @@ localhost:5000
     /api/*  =>  Fastify
 ```
 
+Added CI (**Github Actions**) for pushing different docker builds using **buildx**. This is because I want arm/v7 architecture for hosting.
+
+Added /manifests files for the **kubernetes** environment it will live in.
+
 ### React
 
 I use **React Router** for client-side routes. I don't want it all to be on one url. I want people to be able to link to for example the scoreboard.
@@ -76,7 +80,7 @@ See http://localhost:5000
 
 ```bash
 docker build -t memgame
-docker run --rm --it -p 5000:5000 memgame
+docker run --rm -it -p 5000:5000 memgame
 ```
 
 See http://localhost:5000
