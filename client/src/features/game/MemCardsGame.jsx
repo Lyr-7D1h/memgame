@@ -64,7 +64,7 @@ const MemCardsGame = ({ cardCount, rounds: maxRound, seconds, onFinish }) => {
   // Timer
   useEffect(() => {
     if (hasStarted) {
-      if (progress === 0) {
+      if (progress <= 0) {
         // flip cards and make clickable
         setCards((cards) =>
           cards.map(({ flipped, clickable, ...props }) => ({
