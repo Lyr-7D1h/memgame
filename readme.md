@@ -1,6 +1,6 @@
 # The MemGame
 
-![build image](https://github.com/Lyr-7D1h/memgame/workflows/build%20our%20image/badge.svg?branch=master)
+![Docker Buildx](https://github.com/Lyr-7D1h/memgame/workflows/Docker%20Buildx/badge.svg)
 
 Welcome to the memory game.
 I slightly changed the requirements to make it more interesting and game like.
