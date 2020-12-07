@@ -26,7 +26,7 @@ server
     options: { prefix: "api" },
   });
 
-server.listen(5000, (err) => {
+server.listen(5000, "0.0.0.0", (err) => {
   if (err) {
     server.log.error(err);
     process.exit(1);

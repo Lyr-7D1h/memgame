@@ -1,4 +1,5 @@
 # The MemGame
+
 ![build image](https://github.com/Lyr-7D1h/memgame/workflows/build%20our%20image/badge.svg?branch=master)
 
 Welcome to the memory game.
@@ -77,6 +78,8 @@ See http://localhost:5000
 docker build -t memgame
 docker run --rm --it memgame
 ```
+
+See http://localhost:5000
 
 ### Notes
 
