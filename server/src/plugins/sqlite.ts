@@ -4,7 +4,9 @@ import { FastifyPluginAsync } from "fastify";
 import path from "path";
 import fp from "fastify-plugin";
 
-const DB_PATH = path.join(__dirname, "../../memgame.db");
+const DB_PATH = process.env.DATABASE_PATH
+  ? process.env.DATABASE_PATH
+  : path.join(__dirname, "../../memgame.db");
 
 declare module "fastify" {
   interface FastifyInstance {

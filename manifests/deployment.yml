@@ -17,3 +17,13 @@ spec:
           image: lyr7d1h/memgame:latest
           ports:
             - containerPort: 5000
+          env:
+            - name: DATABASE_PATH
+              value: /usr/db/memgame.db
+          volumeMounts:
+            - name: sqlite-volume
+              mountPath: /usr/db
+      volumes:
+        - name: sqlite-volume
+          hostPath:
+            path: "/home/docker/memgamedb"

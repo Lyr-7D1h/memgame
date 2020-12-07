@@ -12,8 +12,13 @@ const server = fastify({
 });
 
 if (process.env.NODE_ENV === "production") {
+  server.setNotFoundHandler((_request, reply) => {
+    reply.sendFile("index.html");
+  });
   server.register(fastifyStatic, {
     root: path.join(__dirname, "../../client/build"),
+    prefix: "/",
+    wildcard: false,
   });
 }
 
